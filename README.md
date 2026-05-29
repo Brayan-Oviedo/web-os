@@ -264,6 +264,12 @@ MIT — Úsalo como quieras. Comercial, personal, educativo. Sin restricciones.
 
 ---
 
+## ⚠️ Disclaimer
+
+Este sistema fue desarrollado y probado extensivamente en **GitHub Copilot (VS Code, Agent mode)**. Funciona con cualquier IA compatible (Claude Code, Cursor, ChatGPT, etc.), pero pueden existir diferencias en cómo cada modelo interpreta las instrucciones. Si encuentras un bug o comportamiento inesperado con otra IA, abre un [issue](https://github.com/Brayan-Oviedo/web-os/issues) indicando qué IA usaste y qué prompt enviaste.
+
+---
+
 <div align="center">
 
 **Hecho por [RiseOS](https://github.com/Brayan-Oviedo) — Recurso gratuito para la comunidad.**
