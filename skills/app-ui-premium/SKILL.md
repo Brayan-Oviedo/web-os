@@ -4,6 +4,13 @@
 # Use when: dashboard, CRM, tool, panel, admin, SPA, app, sistema.
 # Does NOT replace cinematic landing patterns — ADDS a new category.
 
+## 100% CAPACITY — MANDATORY
+Every output MUST use ALL components below. No partial deliveries.
+- Every interaction MUST be functional (filters filter, modals reset, nav renders pages).
+- Every visual pattern MUST be applied (metric lines, shadows, noise, glow checkboxes).
+- If the quality gate has a checkbox, it SHIPS. No exceptions. No "simplified version".
+- SUMAR VALOR, NUNCA RESTAR.
+
 ---
 
 ## WHEN TO LOAD THIS SKILL
