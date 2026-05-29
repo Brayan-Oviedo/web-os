@@ -87,20 +87,41 @@ La IA produce: HTML completo con GSAP, scroll animations, parallax,
 
 ## Configuración (menos de 1 minuto)
 
-### Paso 1 — Clonar
+### Paso 1 — Clonar en la raíz de tu proyecto
 
 ```bash
 git clone https://github.com/Brayan-Oviedo/web-os.git
 ```
 
-### Paso 2 — Abrir tu proyecto con tu IA favorita
+O si ya tienes un proyecto y quieres añadirlo dentro:
 
-**Si usas GitHub Copilot, Claude Code, o Cursor**: no hay paso 2. Ya funciona. La IA detecta los archivos de instrucciones automáticamente.
+```bash
+cd tu-proyecto/
+git clone https://github.com/Brayan-Oviedo/web-os.git .webos
+```
 
-**Si usas otra IA** (ChatGPT, Open WebUI, LM Studio, etc.):
-1. Copia el contenido de `agents/web-architect.agent.md` en el system prompt
-2. Para landings, añade también `skills/ui-ux-pro-max/SKILL.md`
-3. Para dashboards, añade `skills/app-ui-premium/SKILL.md`
+### Paso 2 — Abre tu editor y listo
+
+**GitHub Copilot (VS Code):**
+1. Abre la carpeta clonada (o tu proyecto que la contiene) en VS Code
+2. Abre Copilot Chat → modo Agent
+3. Escribe tu prompt. Copilot lee `.github/copilot-instructions.md` automáticamente.
+
+**Claude Code:**
+1. Navega a la carpeta clonada en terminal
+2. Ejecuta `claude` — Claude lee `CLAUDE.md` automáticamente
+3. Escribe tu prompt.
+
+**Cursor:**
+1. Abre la carpeta clonada en Cursor
+2. Abre el chat con Cmd+L o Ctrl+L
+3. Escribe tu prompt. Cursor lee `.cursorrules` automáticamente.
+
+**ChatGPT / Open WebUI / LM Studio / cualquier otra IA:**
+1. Copia el contenido completo de `agents/web-architect.agent.md` en el system prompt (o custom instructions)
+2. Para landings, pega también el contenido de `skills/ui-ux-pro-max/SKILL.md`
+3. Para dashboards, pega el contenido de `skills/app-ui-premium/SKILL.md`
+4. Escribe tu prompt.
 
 ### Paso 3 — Pedir lo que necesitas
 
