@@ -1,145 +1,240 @@
-# WebOS — Premium Web Builder for AI Assistants
+# WebOS — Tu Diseñador Web Premium con IA
 
-> Turn any AI (Claude Code, GitHub Copilot, Cursor, ChatGPT) into a €2000+ web designer.  
-> One sentence = cinematic landing page or premium dashboard. Single-file HTML. Zero config.
+<div align="center">
+
+**Un prompt. Una página completa. Nivel agencia €2000+.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Works with](https://img.shields.io/badge/Works%20with-Copilot%20%7C%20Claude%20%7C%20Cursor-blue)]()
+[![Version](https://img.shields.io/badge/version-3.1.0-green)]()
+
+</div>
 
 ---
 
-## ⚡ Setup (30 seconds)
+## El Problema
 
-### Option A — Clone into your project
+Crear una landing page o dashboard premium toma **días de trabajo**:
+- Buscar inspiración, copiar patrones, ajustar animaciones...
+- Contratar un diseñador: €500–€2000 por página
+- Usar templates: se ven genéricos, iguales a 10,000 sitios más
+- Pedirle a una IA sin contexto: produce HTML de 2015, sin animaciones, sin alma
+
+**Resultado**: pierdes tiempo, dinero, o te conformas con algo mediocre.
+
+---
+
+## La Solución
+
+**WebOS** convierte cualquier IA en un diseñador web de nivel agencia premium.
+
+No es un template. No es un framework. Es un **sistema de conocimiento** (1,929 líneas de reglas de diseño profesional) que la IA lee y aplica automáticamente.
+
+```
+Tú escribes: "Landing para pizzería premium estilo oscuro cinematográfico"
+
+La IA produce: HTML completo con GSAP, scroll animations, parallax,
+               imágenes reales, tipografía premium, responsive, 13 secciones,
+               cada una con su propia animación única. Listo para producción.
+```
+
+---
+
+## Resultados Reales
+
+| Sin WebOS | Con WebOS |
+|-----------|-----------|
+| Fade-in genérico en todo | Clip-path reveals, blur-to-sharp, 3D tilt, magnetic buttons |
+| Bootstrap/Tailwind básico | Dark cinematic con grain, volumetric lighting, parallax layers |
+| Placeholder images | Imágenes reales de Unsplash auto-seleccionadas |
+| 3-4 secciones simples | 13 secciones con animaciones únicas por sección |
+| "Se ve como template" | "¿Quién te diseñó esto? ¿Cuánto costó?" |
+
+---
+
+## Compatibilidad
+
+| Plataforma | Configuración | Tiempo |
+|------------|---------------|--------|
+| **GitHub Copilot** (VS Code) | Automática — lee `.github/copilot-instructions.md` | 0 seg |
+| **Claude Code** | Automática — lee `CLAUDE.md` | 0 seg |
+| **Cursor** | Automática — lee `.cursorrules` | 0 seg |
+| **ChatGPT / Open WebUI / cualquier otra** | Copiar contenido de `agents/web-architect.agent.md` como system prompt | 30 seg |
+
+---
+
+## Configuración (menos de 1 minuto)
+
+### Paso 1 — Clonar
+
 ```bash
-git clone https://github.com/YOUR_USER/webos.git .webos
+git clone https://github.com/Brayan-Oviedo/web-os.git
 ```
 
-### Option B — Download and drop
-Download this repo and place it anywhere in your project.
+### Paso 2 — Abrir tu proyecto con tu IA favorita
+
+**Si usas GitHub Copilot, Claude Code, o Cursor**: no hay paso 2. Ya funciona. La IA detecta los archivos de instrucciones automáticamente.
+
+**Si usas otra IA** (ChatGPT, Open WebUI, LM Studio, etc.):
+1. Copia el contenido de `agents/web-architect.agent.md` en el system prompt
+2. Para landings, añade también `skills/ui-ux-pro-max/SKILL.md`
+3. Para dashboards, añade `skills/app-ui-premium/SKILL.md`
+
+### Paso 3 — Pedir lo que necesitas
+
+```
+Hazme una landing page para [tu proyecto/negocio]
+```
+
+Eso es todo. La IA sabe qué hacer.
 
 ---
 
-## 🚀 Usage
+## Qué Puede Crear
 
-### GitHub Copilot (VS Code)
-1. Place this folder in your project root (or anywhere)
-2. Open Copilot Chat → Agent mode
-3. Just describe what you want:
+### Landing Pages Cinematográficas
+- Dark premium por defecto (override a light si lo pides)
+- GSAP + ScrollTrigger + Lenis smooth scroll
+- 13 secciones obligatorias con animación única cada una
+- Parallax multicapa, custom cursor, film grain
+- Counter animations, magnetic buttons, horizontal scroll
+- Tipografía: Bebas Neue + Space Grotesk + Inter
+- Imágenes reales de Unsplash (no placeholders)
 
-```
-Hazme una landing page para una pizzería premium estilo MOZZA, dark cinematic
-```
+### Dashboards y Apps Premium
+- Sistema warm-dark con sidebar colapsable
+- Metric cards, tablas, formularios, modales, toasts
+- Chart.js con tema oscuro integrado
+- Persistencia localStorage (export/import incluido)
+- SPA routing sin frameworks — vanilla JS puro
+- Tipografía: Barlow + Barlow Condensed
 
-Copilot reads `.github/copilot-instructions.md` automatically.
+### Ambos generan:
+- **Un solo archivo HTML** — sin build, sin dependencias, sin npm install
+- **100% responsive** — móvil, tablet, desktop
+- **Cero errores en consola**
+- **Listo para producción** — abre el archivo y funciona
 
-### Claude Code
-1. Place this folder in your project root
-2. Claude reads `CLAUDE.md` automatically
-3. Just ask:
+---
 
-```
-Build a SaaS dashboard for a fitness app with metrics, charts, and dark theme
-```
-
-### Cursor
-1. Place this folder in your project root
-2. Cursor reads `.cursorrules` automatically
-3. Ask naturally:
+## Ejemplos de Prompts
 
 ```
 Landing page para marca de sneakers premium, estilo Adidas x Foot Locker
 ```
 
-### Any other AI (ChatGPT, Open WebUI, etc.)
-1. Copy the content of `agents/web-architect.agent.md` into your system prompt
-2. For landings, also paste `skills/ui-ux-pro-max/SKILL.md`
-3. For apps/dashboards, paste `skills/app-ui-premium/SKILL.md`
+```
+Dashboard para gestionar clientes de una agencia de marketing, con métricas y gráficos
+```
+
+```
+Página de producto para audífonos inalámbricos, hero cinematográfico con spotlight
+```
+
+```
+Portfolio de arquitecto, estilo editorial minimalista con galería horizontal
+```
+
+```
+SaaS landing para app de meditación, audiencia millennials, colores cálidos
+```
+
+```
+Panel admin para inventario de tienda, CRUD completo con filtros y export
+```
 
 ---
 
-## 📁 Structure
+## Estructura del Proyecto
 
 ```
-webos/
-├── .github/copilot-instructions.md  ← Auto-loaded by GitHub Copilot
-├── CLAUDE.md                        ← Auto-loaded by Claude Code
-├── .cursorrules                     ← Auto-loaded by Cursor
+web-os/
+├── .github/copilot-instructions.md  ← GitHub Copilot (auto)
+├── CLAUDE.md                        ← Claude Code (auto)
+├── .cursorrules                     ← Cursor (auto)
 ├── agents/
-│   └── web-architect.agent.md       ← The brain (main agent instructions)
+│   └── web-architect.agent.md       ← Cerebro principal (312 líneas)
 ├── skills/
-│   ├── ui-ux-pro-max/SKILL.md      ← Cinematic landing page patterns
-│   └── app-ui-premium/SKILL.md     ← App/Dashboard UI system
-├── examples/                        ← Demo outputs for reference
-└── output/                          ← Your generated pages go here
+│   ├── ui-ux-pro-max/SKILL.md      ← Sistema cinematic para landings (639 líneas)
+│   └── app-ui-premium/SKILL.md     ← Sistema UI para apps (978 líneas)
+├── examples/                        ← Demos funcionales de referencia
+│   ├── demo-landing-cinematic.html
+│   └── demo-app-dashboard.html
+└── output/                          ← Aquí se guardan tus páginas generadas
 ```
 
 ---
 
-## 🎯 What It Does
+## Stack Técnico (todo via CDN, zero install)
 
-### Landing Pages (cinematic)
-- Dark premium aesthetic (€2000+ level)
-- GSAP + ScrollTrigger + Lenis smooth scroll
-- 13 mandatory sections with unique animations each
-- 3D tilt cards, magnetic buttons, counter animations
-- Clip-path reveals, blur-to-sharp text, parallax layers
-- Real images from Unsplash (auto-sourced)
-- Film grain overlay, custom cursor, volumetric lighting
+**Para Landings:**
+| Tecnología | Uso |
+|------------|-----|
+| GSAP 3.12 + ScrollTrigger | Animaciones cinematográficas |
+| Lenis 1.1 | Smooth scroll premium |
+| Google Fonts | Bebas Neue, Space Grotesk, Inter |
+| Unsplash | Imágenes reales auto-sourced |
 
-### App/Dashboard UIs
-- Warm-dark palette with collapsible sidebar
-- Metric cards, tables, forms, modals, toasts
-- Chart.js integration (dark theme)
-- localStorage persistence (ld/sv pattern)
-- Export/Import data backup
-- SPA routing without frameworks
-
----
-
-## 💬 Example Prompts
-
-| Prompt | Result |
-|--------|--------|
-| "Landing para estudio de arquitectura minimalista" | Dark cinematic, Ken Burns hero, horizontal gallery |
-| "Dashboard CRM para agencia de marketing" | Sidebar + metrics + tables + charts + modals |
-| "Página de producto para audífonos premium" | Product-as-art hero, spotlight, 3D tilt, parallax |
-| "Portfolio de fotógrafo, estilo editorial" | Split layouts, image reveals, smooth scroll |
-| "SaaS landing for meditation app, English" | Organic mood, gradient mesh, gentle animations |
-| "Panel admin para gestionar inventario" | Full CRUD app with filters, export, responsive |
+**Para Apps:**
+| Tecnología | Uso |
+|------------|-----|
+| Chart.js 4.4 | Gráficos con tema dark |
+| Google Fonts | Barlow, Barlow Condensed |
+| localStorage | Persistencia de datos |
+| Vanilla JS | SPA routing, state management |
 
 ---
 
-## ⚙️ Tech Stack (all via CDN, zero install)
+## Reglas de Calidad (aplicadas automáticamente)
 
-**Landings:**
-- GSAP 3.12 + ScrollTrigger (animations)
-- Lenis 1.1 (smooth scroll)
-- Google Fonts (Bebas Neue, Space Grotesk, Inter)
+La IA verifica cada output contra un quality gate:
 
-**Apps:**
-- Barlow + Barlow Condensed (typography)
-- Chart.js 4.4 (charts)
-- Pure CSS + vanilla JS (no frameworks)
+- ✅ Spacing controlado (max 6vh entre secciones — nunca "mucho espacio negro")
+- ✅ Performance (quickTo en cursor, grain estático, scroll debounced)
+- ✅ Variedad obligatoria (cada sección animación diferente)
+- ✅ Anti-patterns bloqueados (no particles entre secciones, no `transition: all`, no fade-up repetido)
+- ✅ Premium real: clip-path, 3D tilt, counters, blur reveals, magnetic buttons, letter-spacing animations
 
 ---
 
-## 📋 Quality Standards
+## FAQ
 
-Every output passes a quality gate:
-- ✅ Single HTML file, production-ready
-- ✅ Responsive (375px → 1440px)
-- ✅ No console errors
-- ✅ Real images (not placeholders)
-- ✅ Unique animation per section
-- ✅ Performance: quickTo cursor, static grain, debounced scroll
-- ✅ No generic templates — every page feels custom
+**¿Necesito saber programar?**
+No. Solo necesitas describir lo que quieres en lenguaje natural.
+
+**¿Funciona en español e inglés?**
+Sí. Pide en cualquier idioma.
+
+**¿Puedo usar el HTML generado en producción?**
+Sí. Cada archivo es production-ready. Súbelo a cualquier hosting (Netlify, Vercel, GitHub Pages, etc.).
+
+**¿Puedo modificar el output?**
+Claro. Es HTML/CSS/JS estándar. Edita lo que quieras.
+
+**¿Funciona sin internet?**
+El sistema de instrucciones sí. Pero el HTML generado usa CDNs (GSAP, fonts). Para offline, descarga esas dependencias.
+
+**¿Puedo combinarlo con frameworks (React, Next.js, Astro)?**
+Sí. Pídele el formato que quieras en tu prompt. El default es single-file HTML por simplicidad.
 
 ---
 
-## 🆓 License
+## Contribuir
 
-MIT — Use it however you want. Commercial, personal, whatever.
+PRs bienvenidos. Si descubres un patrón premium nuevo o una mejora al quality gate, abre un issue o PR.
 
 ---
 
-## 🙏 Credits
+## Licencia
 
-Built by the RiseOS ecosystem. Extracted as a free standalone tool for the community.
+MIT — Úsalo como quieras. Comercial, personal, educativo. Sin restricciones.
+
+---
+
+<div align="center">
+
+**Hecho por [RiseOS](https://github.com/Brayan-Oviedo) — Extraído como recurso gratuito para la comunidad.**
+
+⭐ Si te sirve, deja una estrella. Ayuda a que más gente lo descubra.
+
+</div>
