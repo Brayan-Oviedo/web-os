@@ -8,6 +8,17 @@ Premium = RESTRAINT. Not more effects, but the RIGHT effects with impeccable tim
 
 ---
 
+## 100% CAPACITY RULE (MANDATORY — NO EXCEPTIONS)
+WebOS ALWAYS delivers at FULL capacity. Every output MUST pass the COMPLETE quality gate of its path.
+- LANDING path: ALL 13 sections, ALL animation patterns (no skipping), full CDN stack, EVERY checklist item green.
+- APP path: ALL components (sidebar, metrics, tables, modals, toasts, badges, charts, progress, checkboxes), ALL interactions functional (filters work, modals reset, nav renders, export/import real).
+- NEVER ship a "quick version" or "simplified demo". The FIRST output IS the final quality.
+- NEVER skip a feature because "it's complex" or "optional". If it's in the quality gate, it ships.
+- Philosophy: SUMAR VALOR, NUNCA RESTAR. Every addition must work. Every pattern must be applied. Every interaction must be real.
+- If the output doesn't pass 100% of the quality gate checklist, it is NOT done. Keep building until it does.
+
+---
+
 ## OUTPUT MODE
 - Default: MINIMAL. Output = code (HTML), not description of code.
 - Always produce a single complete HTML file. Never fragments.
@@ -267,41 +278,85 @@ const words = text.split(' ').map(w => `<span style="margin-right:0.25em">${w}</
 }
 ```
 
+### Preloader Pattern
+```js
+const tl = gsap.timeline();
+tl.to('#intro-logo', { opacity: 1, duration: 0.8, ease: 'power2.out' })
+  .to('#intro-line', { height: '50px', duration: 0.6, ease: 'power2.inOut' })
+  .to('#preloader', { yPercent: -100, duration: 0.8, delay: 0.3, ease: 'expo.inOut',
+    onComplete: () => { document.getElementById('preloader').style.display = 'none'; revealHero(); }
+  });
+```
+
 ---
 
-## STEP 4 — Quality Gate
+## STEP 4 — Quality Gate (ALL must pass)
 
 ### LANDING QUALITY GATE:
 **Structure:**
-- [ ] Single HTML file, no build step needed
+- [ ] Single HTML file, no external dependencies besides CDN
 - [ ] All 13 sections present (unless client excluded)
-- [ ] Responsive (375px, 768px, 1440px)
-- [ ] No console errors
+- [ ] Responsive (375px mobile, 768px tablet, 1440px desktop)
+- [ ] No JS errors in console
+- [ ] All images load (use Unsplash with specific IDs)
 
-**Visual:**
-- [ ] Dark premium aesthetic (not generic bootstrap)
+**Visual Premium:**
+- [ ] NO excessive black space between sections (max 6vh padding)
+- [ ] Cinema background (gradient + grain, not plain #000)
+- [ ] Cinematic lighting (beam, glow, or spotlight)
+- [ ] Stats have animated counters + gradient text + glow
+- [ ] Plans/pricing section with 3 tiers
+- [ ] Events or timeline section present
 - [ ] Real Unsplash images (not placeholders)
 - [ ] Film grain overlay present
 - [ ] Custom cursor with quickTo
 - [ ] CSS variables for theming
 
-**Motion:**
+**Motion/Animation:**
+- [ ] GSAP + ScrollTrigger registered
 - [ ] Lenis smooth scroll active
-- [ ] Each section has UNIQUE animation (no repeated fade-ups)
-- [ ] ScrollTrigger-driven (not intersection observer)
-- [ ] Counters animate on scroll-in
-- [ ] At least one magnetic button
+- [ ] Every section has UNIQUE animation (no repeated fade-up)
+- [ ] 3D tilt on cards (perspective + rotateX/Y on mousemove)
+- [ ] Magnetic effect on primary CTA
+- [ ] Cursor uses quickTo (not gsap.to on mousemove)
+- [ ] Preloader with timeline
+- [ ] Hero scroll-driven (scrub or pin)
 
-**Section animations (variety check):**
-- [ ] Hero: parallax layers + ghost text + beam
-- [ ] Stats: counter + glow pulse
-- [ ] Cards: 3D tilt + stagger
-- [ ] Events: slide + clip from left
-- [ ] Quotes: blur-to-sharp
-- [ ] CTA: scale punch + glow
+**Section animations checklist (VARIETY):**
+- Hero: parallax scrub + beam + ghost text
+- Stats: counter + glow + stagger
+- Features/grid: 3D flip entrance + tilt hover
+- Gallery: horizontal scroll OR clip-path reveal
+- Plans: rotateX entrance + featured glow
+- Events: slide-left + clip-path + punch dates
+- Press: blur-to-sharp + shimmer logos
+- CTA: scale + glow pulse + magnetic
+- Newsletter: form slide + button pulse
 
 ### APP QUALITY GATE:
 (See `skills/app-ui-premium/SKILL.md` for full app checklist)
+
+---
+
+## AUDIO HANDLING (if requested)
+
+- NEVER use Pixabay CDN (returns 403 on hotlink)
+- Prefer: user-provided local file → embed as base64 data URI
+- If remote needed: SoundHelix (confirmed 200), or Google storage
+- Remove `crossOrigin = 'anonymous'` (causes CORS blocks)
+- Always include visible play button (fixed, bottom-right) as fallback
+- Scroll autoplay is unreliable on file:// — serve via localhost
+- Button click = guaranteed user gesture = guaranteed playback
+
+---
+
+## THEME ADAPTATION
+
+Default is ALWAYS dark cinematic. If client requests light:
+- Replace #050507 → #fafafa
+- Replace white text → #1a1a1a
+- Reduce glow opacity by 50%
+- Keep ALL motion patterns (they work on any background)
 
 ---
 

@@ -87,18 +87,25 @@ La IA produce: HTML completo con GSAP, scroll animations, parallax,
 
 ## Configuración (menos de 1 minuto)
 
-### Paso 1 — Clonar en la raíz de tu proyecto
+### Paso 1 — Descargar
 
+**Opción A — Clonar con Git:**
 ```bash
 git clone https://github.com/Brayan-Oviedo/web-os.git
 ```
 
-O si ya tienes un proyecto y quieres añadirlo dentro:
-
+**Opción B — Clonar dentro de un proyecto existente:**
 ```bash
 cd tu-proyecto/
 git clone https://github.com/Brayan-Oviedo/web-os.git .webos
 ```
+
+**Opción C — Descargar ZIP (sin Git):**
+1. Ve a [github.com/Brayan-Oviedo/web-os](https://github.com/Brayan-Oviedo/web-os)
+2. Click en el botón verde **"Code"** → **"Download ZIP"**
+3. Descomprime donde quieras
+
+> El repo es **público**. No necesitas cuenta de GitHub ni autenticación para clonar o descargar.
 
 ### Paso 2 — Abre tu editor y listo
 
