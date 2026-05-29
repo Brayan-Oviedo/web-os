@@ -8,142 +8,126 @@
 [![Works with](https://img.shields.io/badge/Works%20with-Copilot%20%7C%20Claude%20%7C%20Cursor-blue)]()
 [![Version](https://img.shields.io/badge/version-3.1.0-green)]()
 
+[Instalación](#-instalación) · [Cómo Funciona](#-cómo-funciona) · [Ejemplos](#-ejemplos-de-prompts) · [FAQ](#-faq)
+
 </div>
 
 ---
 
-## Requisitos
+## 🚀 Instalación
 
-| Requisito | Detalle |
-|-----------|---------|
-| **IA compatible** | GitHub Copilot (VS Code), Claude Code, Cursor, ChatGPT, Open WebUI, o cualquier LLM que acepte system prompts |
-| **Editor** | VS Code (recomendado), Cursor, o terminal con Claude Code |
-| **Modelo mínimo** | GPT-4o, Claude Sonnet 3.5+, o equivalente (modelos pequeños no siguen instrucciones complejas) |
-| **Internet** | Sí — el HTML generado usa CDNs (GSAP, Google Fonts, Unsplash) |
-| **Programación** | NO necesitas saber código. Solo describir lo que quieres |
-| **Instalación** | Cero. No requiere Node.js, npm, ni ninguna dependencia local |
-| **Sistema operativo** | Windows, macOS, Linux — cualquiera |
-| **Hosting** | El HTML funciona en cualquier hosting: Netlify, Vercel, GitHub Pages, o simplemente abrir el archivo |
-
-### Lo que NO necesitas:
-- ❌ No necesitas saber HTML/CSS/JS
-- ❌ No necesitas instalar nada (ni Node, ni Python, ni Docker)
-- ❌ No necesitas pagar (es MIT, gratuito para siempre)
-- ❌ No necesitas experiencia en diseño
-- ❌ No necesitas configurar nada manualmente (la IA lo detecta sola)
-
----
-
-## El Problema
-
-Crear una landing page o dashboard premium toma **días de trabajo**:
-- Buscar inspiración, copiar patrones, ajustar animaciones...
-- Contratar un diseñador: €500–€2000 por página
-- Usar templates: se ven genéricos, iguales a 10,000 sitios más
-- Pedirle a una IA sin contexto: produce HTML de 2015, sin animaciones, sin alma
-
-**Resultado**: pierdes tiempo, dinero, o te conformas con algo mediocre.
-
----
-
-## La Solución
-
-**WebOS** convierte cualquier IA en un diseñador web de nivel agencia premium.
-
-No es un template. No es un framework. Es un **sistema de conocimiento** (1,929 líneas de reglas de diseño profesional) que la IA lee y aplica automáticamente.
-
-```
-Tú escribes: "Landing para pizzería premium estilo oscuro cinematográfico"
-
-La IA produce: HTML completo con GSAP, scroll animations, parallax,
-               imágenes reales, tipografía premium, responsive, 13 secciones,
-               cada una con su propia animación única. Listo para producción.
-```
-
----
-
-## Resultados Reales
-
-| Sin WebOS | Con WebOS |
-|-----------|-----------|
-| Fade-in genérico en todo | Clip-path reveals, blur-to-sharp, 3D tilt, magnetic buttons |
-| Bootstrap/Tailwind básico | Dark cinematic con grain, volumetric lighting, parallax layers |
-| Placeholder images | Imágenes reales de Unsplash auto-seleccionadas |
-| 3-4 secciones simples | 13 secciones con animaciones únicas por sección |
-| "Se ve como template" | "¿Quién te diseñó esto? ¿Cuánto costó?" |
-
----
-
-## Compatibilidad
-
-| Plataforma | Configuración | Tiempo |
-|------------|---------------|--------|
-| **GitHub Copilot** (VS Code) | Automática — lee `.github/copilot-instructions.md` | 0 seg |
-| **Claude Code** | Automática — lee `CLAUDE.md` | 0 seg |
-| **Cursor** | Automática — lee `.cursorrules` | 0 seg |
-| **ChatGPT / Open WebUI / cualquier otra** | Copiar contenido de `agents/web-architect.agent.md` como system prompt | 30 seg |
-
----
-
-## Configuración (menos de 1 minuto)
-
-### Paso 1 — Descargar
-
-**Opción A — Clonar con Git:**
+### Opción A — Clonar (recomendado)
 ```bash
 git clone https://github.com/Brayan-Oviedo/web-os.git
 ```
 
-**Opción B — Clonar dentro de un proyecto existente:**
+### Opción B — Dentro de un proyecto existente
 ```bash
 cd tu-proyecto/
 git clone https://github.com/Brayan-Oviedo/web-os.git .webos
 ```
 
-**Opción C — Descargar ZIP (sin Git):**
-1. Ve a [github.com/Brayan-Oviedo/web-os](https://github.com/Brayan-Oviedo/web-os)
-2. Click en el botón verde **"Code"** → **"Download ZIP"**
-3. Descomprime donde quieras
+### Opción C — Descargar ZIP (sin Git)
+1. Click en el botón verde **"Code"** arriba → **"Download ZIP"**
+2. Descomprime en tu carpeta de trabajo
 
-> El repo es **público**. No necesitas cuenta de GitHub ni autenticación para clonar o descargar.
-
-### Paso 2 — Abre tu editor y listo
-
-**GitHub Copilot (VS Code):**
-1. Abre la carpeta clonada (o tu proyecto que la contiene) en VS Code
-2. Abre Copilot Chat → modo Agent
-3. Escribe tu prompt. Copilot lee `.github/copilot-instructions.md` automáticamente.
-
-**Claude Code:**
-1. Navega a la carpeta clonada en terminal
-2. Ejecuta `claude` — Claude lee `CLAUDE.md` automáticamente
-3. Escribe tu prompt.
-
-**Cursor:**
-1. Abre la carpeta clonada en Cursor
-2. Abre el chat con Cmd+L o Ctrl+L
-3. Escribe tu prompt. Cursor lee `.cursorrules` automáticamente.
-
-**ChatGPT / Open WebUI / LM Studio / cualquier otra IA:**
-1. Copia el contenido completo de `agents/web-architect.agent.md` en el system prompt (o custom instructions)
-2. Para landings, pega también el contenido de `skills/ui-ux-pro-max/SKILL.md`
-3. Para dashboards, pega el contenido de `skills/app-ui-premium/SKILL.md`
-4. Escribe tu prompt.
-
-### Paso 3 — Pedir lo que necesitas
-
-```
-Hazme una landing page para [tu proyecto/negocio]
-```
-
-Eso es todo. La IA sabe qué hacer.
+> **Repo público.** No necesitas cuenta de GitHub, ni token, ni autenticación. Cualquiera puede clonar o descargar.
 
 ---
 
-## Qué Puede Crear
+## ⚡ Uso Inmediato (según tu IA)
+
+| Tu IA | Qué hacer | Tiempo |
+|-------|-----------|--------|
+| **GitHub Copilot** | Abre la carpeta en VS Code → Copilot Chat → Agent mode → escribe tu prompt | 0 config |
+| **Claude Code** | `cd web-os && claude` → escribe tu prompt | 0 config |
+| **Cursor** | Abre la carpeta en Cursor → Chat (Cmd+L) → escribe tu prompt | 0 config |
+| **ChatGPT / Open WebUI / otra** | Copia `agents/web-architect.agent.md` como system prompt + skill según tipo | 30 seg |
+
+**¿Por qué 0 config?** Cada IA tiene su archivo de auto-detección:
+- GitHub Copilot lee `.github/copilot-instructions.md` automáticamente
+- Claude Code lee `CLAUDE.md` automáticamente
+- Cursor lee `.cursorrules` automáticamente
+
+**Para IAs sin auto-detección (ChatGPT, Open WebUI, LM Studio, etc.):**
+1. Copia el contenido de `agents/web-architect.agent.md` en tu system prompt o custom instructions
+2. Si vas a hacer una **landing page** → pega también `skills/ui-ux-pro-max/SKILL.md`
+3. Si vas a hacer un **dashboard/app** → pega también `skills/app-ui-premium/SKILL.md`
+
+---
+
+## 💬 Tu Primer Prompt
+
+Una vez configurado, solo escribe:
+
+```
+Hazme una landing page para [describe tu negocio/proyecto]
+```
+
+La IA genera un archivo HTML completo, production-ready, con animaciones cinematográficas, imágenes reales, y responsive. Lo guardará en `output/`.
+
+---
+
+## 🎯 Qué Problema Resuelve
+
+| El dolor | La realidad |
+|----------|-------------|
+| Contratar diseñador web | €500–€2000 por página. Semanas de espera. |
+| Usar templates | Genéricos. Iguales a 10,000 sitios. Sin personalidad. |
+| Pedirle a la IA sin contexto | HTML de 2015. Sin animaciones. Sin scroll effects. Feo. |
+| Hacerlo tú mismo | Días buscando inspiración, copiando snippets, ajustando CSS. |
+
+**WebOS elimina todo eso.** Es un sistema de conocimiento (1,929 líneas de reglas profesionales) que la IA lee y aplica. El resultado: páginas que parecen de agencia premium.
+
+---
+
+## 📊 Antes vs Después
+
+| Sin WebOS | Con WebOS |
+|-----------|-----------|
+| Fade-in genérico en todo | Clip-path reveals, blur-to-sharp, 3D tilt, magnetic buttons |
+| Bootstrap/Tailwind plano | Dark cinematic con grain, volumetric lighting, parallax layers |
+| "Image placeholder" | Imágenes reales de Unsplash auto-seleccionadas por la IA |
+| 3-4 secciones simples | 13 secciones con animación única por cada una |
+| "Se ve como template" | "¿Quién te diseñó esto? ¿Cuánto te costó?" |
+
+---
+
+## 🔧 Cómo Funciona
+
+WebOS no genera código por sí solo. **Potencia a tu IA** con conocimiento experto:
+
+```
+┌─────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  Tu Prompt  │ ──→ │  IA + WebOS      │ ──→ │  HTML Premium   │
+│  (1 frase)  │     │  (1,929 reglas)  │     │  (producción)   │
+└─────────────┘     └──────────────────┘     └─────────────────┘
+```
+
+La IA detecta automáticamente qué tipo de página quieres:
+- **Landing/web/portfolio** → aplica sistema cinematic (GSAP, parallax, 13 secciones)
+- **Dashboard/app/admin** → aplica sistema de app (sidebar, tablas, charts, modals)
+
+---
+
+## 📋 Requisitos
+
+| Requisito | Detalle |
+|-----------|---------|
+| **IA** | Copilot, Claude Code, Cursor, ChatGPT, Open WebUI, o cualquier LLM |
+| **Modelo mínimo** | GPT-4o, Claude Sonnet 3.5+, o equivalente |
+| **Saber programar** | NO. Solo describir lo que quieres |
+| **Instalar algo** | NO. Cero dependencias |
+| **Internet** | Sí (el HTML usa CDNs: GSAP, fonts, imágenes) |
+| **Sistema operativo** | Windows, macOS, Linux |
+| **Hosting** | Cualquiera: Netlify, Vercel, GitHub Pages, o abrir el .html directo |
+
+---
+
+## 🎨 Qué Puede Crear
 
 ### Landing Pages Cinematográficas
-- Dark premium por defecto (override a light si lo pides)
+- Dark premium por defecto (light si lo pides)
 - GSAP + ScrollTrigger + Lenis smooth scroll
 - 13 secciones obligatorias con animación única cada una
 - Parallax multicapa, custom cursor, film grain
@@ -159,54 +143,49 @@ Eso es todo. La IA sabe qué hacer.
 - SPA routing sin frameworks — vanilla JS puro
 - Tipografía: Barlow + Barlow Condensed
 
-### Ambos generan:
-- **Un solo archivo HTML** — sin build, sin dependencias, sin npm install
+### Todo output es:
+- **Un solo archivo HTML** — sin build, sin npm, sin dependencias locales
 - **100% responsive** — móvil, tablet, desktop
 - **Cero errores en consola**
-- **Listo para producción** — abre el archivo y funciona
+- **Producción-ready** — abre el archivo y funciona
 
 ---
 
-## Ejemplos de Prompts
+## 💬 Ejemplos de Prompts
 
 ```
 Landing page para marca de sneakers premium, estilo Adidas x Foot Locker
 ```
-
 ```
 Dashboard para gestionar clientes de una agencia de marketing, con métricas y gráficos
 ```
-
 ```
 Página de producto para audífonos inalámbricos, hero cinematográfico con spotlight
 ```
-
 ```
 Portfolio de arquitecto, estilo editorial minimalista con galería horizontal
 ```
-
 ```
 SaaS landing para app de meditación, audiencia millennials, colores cálidos
 ```
-
 ```
 Panel admin para inventario de tienda, CRUD completo con filtros y export
 ```
 
 ---
 
-## Estructura del Proyecto
+## 📁 Estructura
 
 ```
 web-os/
-├── .github/copilot-instructions.md  ← GitHub Copilot (auto)
-├── CLAUDE.md                        ← Claude Code (auto)
-├── .cursorrules                     ← Cursor (auto)
+├── .github/copilot-instructions.md  ← Auto-carga en GitHub Copilot
+├── CLAUDE.md                        ← Auto-carga en Claude Code
+├── .cursorrules                     ← Auto-carga en Cursor
 ├── agents/
-│   └── web-architect.agent.md       ← Cerebro principal (312 líneas)
+│   └── web-architect.agent.md       ← Cerebro principal (367 líneas de reglas)
 ├── skills/
 │   ├── ui-ux-pro-max/SKILL.md      ← Sistema cinematic para landings (639 líneas)
-│   └── app-ui-premium/SKILL.md     ← Sistema UI para apps (978 líneas)
+│   └── app-ui-premium/SKILL.md     ← Sistema UI para apps/dashboards (978 líneas)
 ├── examples/                        ← Demos funcionales de referencia
 │   ├── demo-landing-cinematic.html
 │   └── demo-app-dashboard.html
@@ -215,67 +194,71 @@ web-os/
 
 ---
 
-## Stack Técnico (todo via CDN, zero install)
+## ⚙️ Stack Técnico (todo via CDN, zero install)
 
-**Para Landings:**
+**Landings:**
 | Tecnología | Uso |
 |------------|-----|
-| GSAP 3.12 + ScrollTrigger | Animaciones cinematográficas |
+| GSAP 3.12 + ScrollTrigger | Animaciones cinematográficas scroll-driven |
 | Lenis 1.1 | Smooth scroll premium |
-| Google Fonts | Bebas Neue, Space Grotesk, Inter |
+| Google Fonts | Bebas Neue, Space Grotesk, Inter, JetBrains Mono |
 | Unsplash | Imágenes reales auto-sourced |
 
-**Para Apps:**
+**Apps/Dashboards:**
 | Tecnología | Uso |
 |------------|-----|
 | Chart.js 4.4 | Gráficos con tema dark |
 | Google Fonts | Barlow, Barlow Condensed |
-| localStorage | Persistencia de datos |
+| localStorage | Persistencia + export/import |
 | Vanilla JS | SPA routing, state management |
 
 ---
 
-## Reglas de Calidad (aplicadas automáticamente)
+## ✅ Quality Gate (automático)
 
-La IA verifica cada output contra un quality gate:
+La IA verifica cada output contra estas reglas — no entrega hasta que TODO pase:
 
-- ✅ Spacing controlado (max 6vh entre secciones — nunca "mucho espacio negro")
-- ✅ Performance (quickTo en cursor, grain estático, scroll debounced)
-- ✅ Variedad obligatoria (cada sección animación diferente)
-- ✅ Anti-patterns bloqueados (no particles entre secciones, no `transition: all`, no fade-up repetido)
-- ✅ Premium real: clip-path, 3D tilt, counters, blur reveals, magnetic buttons, letter-spacing animations
+- Spacing controlado (max 6vh — nunca "mucho espacio negro")
+- Performance (quickTo cursor, grain estático, scroll debounced)
+- Variedad obligatoria (cada sección animación diferente)
+- Anti-patterns bloqueados (no particles random, no `transition: all`, no fade-up repetido)
+- Premium real: clip-path, 3D tilt, counters, blur reveals, magnetic buttons
+- 100% capacity: NUNCA entrega versión "simplificada" — siempre full quality
 
 ---
 
-## FAQ
+## ❓ FAQ
 
 **¿Necesito saber programar?**
-No. Solo necesitas describir lo que quieres en lenguaje natural.
+No. Solo describe lo que quieres en lenguaje natural.
 
 **¿Funciona en español e inglés?**
-Sí. Pide en cualquier idioma.
+Sí. Cualquier idioma.
 
-**¿Puedo usar el HTML generado en producción?**
-Sí. Cada archivo es production-ready. Súbelo a cualquier hosting (Netlify, Vercel, GitHub Pages, etc.).
+**¿Puedo usar el HTML en producción?**
+Sí. Súbelo a Netlify, Vercel, GitHub Pages, o cualquier hosting.
 
 **¿Puedo modificar el output?**
-Claro. Es HTML/CSS/JS estándar. Edita lo que quieras.
+Claro. Es HTML/CSS/JS estándar.
 
 **¿Funciona sin internet?**
-El sistema de instrucciones sí. Pero el HTML generado usa CDNs (GSAP, fonts). Para offline, descarga esas dependencias.
+Las instrucciones sí. El HTML generado usa CDNs (GSAP, fonts). Para offline, descarga esas dependencias.
 
-**¿Puedo combinarlo con frameworks (React, Next.js, Astro)?**
-Sí. Pídele el formato que quieras en tu prompt. El default es single-file HTML por simplicidad.
+**¿Puedo pedir React/Next.js/Astro?**
+Sí. Especifícalo en tu prompt. Default es single-file HTML.
 
----
-
-## Contribuir
-
-PRs bienvenidos. Si descubres un patrón premium nuevo o una mejora al quality gate, abre un issue o PR.
+**¿Qué modelo de IA necesito mínimo?**
+GPT-4o, Claude Sonnet 3.5+, o equivalente. Modelos pequeños (GPT-3.5, Llama 7B) no siguen instrucciones complejas bien.
 
 ---
 
-## Licencia
+## 🤝 Contribuir
+
+PRs bienvenidos. Si descubres un patrón premium o mejora al quality gate, abre un issue o PR.
+
+---
+
+## 📄 Licencia
 
 MIT — Úsalo como quieras. Comercial, personal, educativo. Sin restricciones.
 
@@ -283,7 +266,7 @@ MIT — Úsalo como quieras. Comercial, personal, educativo. Sin restricciones.
 
 <div align="center">
 
-**Hecho por [RiseOS](https://github.com/Brayan-Oviedo) — Extraído como recurso gratuito para la comunidad.**
+**Hecho por [RiseOS](https://github.com/Brayan-Oviedo) — Recurso gratuito para la comunidad.**
 
 ⭐ Si te sirve, deja una estrella. Ayuda a que más gente lo descubra.
 
