@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VORTEX — Premium Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#050507;--text:#ffffff;--muted:rgba(255,255,255,0.5);
+--red:#FF2D55;--red-glow:rgba(255,45,85,0.4);
+--purple:#A855F7;--border:rgba(255,255,255,0.06);
+}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,45,85,0.3);border-radius:4px}
+html{scroll-behavior:auto}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* Grain */
+.grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.03;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAElBMVEUAAAAAAAAAAAAAAAAAAAAAAADgKxmiAAAABnRSTlMFBQUFBQVMIhJzAAAASUlEQVQ4y2MYBaNg2AMLBgYGZhDJxMDADCKZGRjYQSQLAwMHiORkYOAEkVwMDFwgkpuBgQdE8jIw8IFIfgYGARApwMAgONDpBgBbXQMdLRWVwgAAAABJRU5ErkJggg==)}
+
+/* Cinema BG */
+#cinema-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#050507}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(120px);animation:floatOrb 20s ease-in-out infinite alternate}
+.bg-orb-1{width:800px;height:800px;background:radial-gradient(circle,rgba(255,45,85,0.07),transparent 70%);top:-300px;left:50%;transform:translateX(-50%)}
+.bg-orb-2{width:600px;height:600px;background:radial-gradient(circle,rgba(168,85,247,0.05),transparent 70%);bottom:-200px;right:-100px}
+@keyframes floatOrb{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.1)}100%{transform:translate(-20px,30px) scale(0.95)}}
+
+/* Cursor */
+#cursor{position:fixed;width:20px;height:20px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;mix-blend-mode:difference;transition:width 0.3s,height 0.3s}
+.cursor-light{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,45,85,0.05),transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:left 0.4s ease-out,top 0.4s ease-out}
+
+/* Preloader */
+#preloader{position:fixed;inset:0;z-index:10000;background:#050507;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#intro-logo{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.15em;opacity:0}
+#intro-line{width:2px;height:0;background:linear-gradient(to bottom,var(--red),transparent);margin-top:16px}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;mix-blend-mode:difference}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.1em}
+.nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:0.02em}
+.nav-cta{padding:8px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.3s}
+.nav-cta:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+/* Hero */
+.hero{position:relative;height:200vh;overflow:hidden}
+.hero-inner{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-ghost{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,18vw,260px);color:rgba(255,255,255,0.02);white-space:nowrap;pointer-events:none;user-select:none;filter:blur(2px)}
+.hero-beam{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:2px;height:120%;background:linear-gradient(to bottom,transparent,var(--red),transparent);box-shadow:0 0 60px 20px var(--red-glow),0 0 120px 40px rgba(255,45,85,0.1);opacity:0.7}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 20px}
+.hero-tag{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,140px);line-height:0.9;letter-spacing:-0.02em;margin-bottom:20px}
+.hero-title span{display:inline-block;background:linear-gradient(135deg,#fff,rgba(255,255,255,0.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:16px;color:var(--muted);max-width:500px;margin:0 auto 32px;line-height:1.6}
+.hero-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--red);color:#fff;border-radius:40px;font-weight:600;font-size:14px;cursor:pointer;position:relative;overflow:hidden;border:none}
+.hero-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.1));opacity:0;transition:opacity 0.3s}
+.hero-btn:hover::after{opacity:1}
+
+/* CTA glow pulse */
+@keyframes glowPulse{0%,100%{box-shadow:0 4px 30px var(--red-glow)}50%{box-shadow:0 8px 50px var(--red-glow),0 0 80px rgba(255,45,85,0.15)}}
+.cta-btn{animation:glowPulse 3s ease-in-out infinite}
+
+/* Newsletter button pulse */
+@keyframes btnPulse{0%,100%{opacity:1}50%{opacity:0.8}}
+.newsletter-form button{animation:btnPulse 2s ease-in-out infinite}
+
+/* Scroll prompt */
+.scroll-prompt{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.7}
+.scroll-prompt span{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+.scroll-prompt .line{width:1px;height:40px;background:linear-gradient(to bottom,var(--red),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:0.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.3)}}
+
+/* Stats */
+.stats{padding:4vh 40px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;position:relative}
+.stats::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0.3}
+.stat{text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:52px;background:linear-gradient(135deg,#fff,var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--red-glow)}
+.stat-label{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* Features grid */
+.features{padding:6vh 40px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);text-align:center;margin-bottom:4vh}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
+.feature-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;cursor:pointer;transform-style:preserve-3d}
+.feature-card::before{content:'';position:absolute;inset:0;background:conic-gradient(from var(--angle,0deg),transparent,var(--red),var(--purple),transparent);opacity:0;transition:opacity 0.5s;border-radius:16px;z-index:-1;padding:1px}
+.feature-card:hover::before{opacity:0.3}
+@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spin{to{--angle:360deg}}
+.feature-card:hover{animation:spin 3s linear infinite}
+.feature-icon{width:48px;height:48px;border-radius:12px;background:rgba(255,45,85,0.1);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.feature-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px}
+.feature-desc{font-size:14px;color:var(--muted);line-height:1.5}
+
+/* Gallery horizontal scroll */
+.gallery-section{position:relative;padding:6vh 0;overflow:hidden}
+.gallery-track{display:flex;gap:1.5rem;padding:0 40px;width:max-content}
+.gallery-item{width:350px;height:420px;border-radius:16px;overflow:hidden;position:relative;flex-shrink:0}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,7,0.9),transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.gallery-item .overlay h3{font-family:'Bebas Neue',sans-serif;font-size:24px;margin-bottom:4px}
+.gallery-item .overlay p{font-size:12px;color:var(--muted)}
+
+/* Plans */
+.plans{padding:6vh 40px;max-width:1100px;margin:0 auto}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.plan{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;position:relative;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+.plan.featured{border-color:var(--red);box-shadow:0 0 40px rgba(255,45,85,0.1)}
+.plan.featured::before{content:'POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 12px;border-radius:20px}
+.plan-name{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);margin-bottom:12px}
+.plan-price{font-family:'Bebas Neue',sans-serif;font-size:56px;margin-bottom:16px}
+.plan-price span{font-size:18px;color:var(--muted)}
+.plan-features{list-style:none;text-align:left;margin-bottom:24px}
+.plan-features li{padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.plan-features li::before{content:'✓';color:var(--red);font-weight:700;font-size:12px}
+.plan-btn{width:100%;padding:12px;border:1px solid var(--border);background:transparent;color:#fff;border-radius:30px;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.3s}
+.plan-btn:hover{background:var(--red);border-color:var(--red)}
+.plan.featured .plan-btn{background:var(--red);border-color:var(--red)}
+.plan.featured .plan-btn:hover{background:#e6234e}
+
+/* Timeline */
+.timeline{padding:6vh 40px;max-width:800px;margin:0 auto}
+.timeline-list{position:relative;padding-left:32px}
+.timeline-list::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--red),transparent)}
+.timeline-item{position:relative;padding:20px 0;padding-left:24px}
+.timeline-item::before{content:'';position:absolute;left:-25px;top:26px;width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red-glow)}
+.timeline-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);letter-spacing:0.05em;margin-bottom:6px}
+.timeline-title{font-size:16px;font-weight:600;margin-bottom:4px}
+.timeline-desc{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* Testimonials */
+.testimonials{padding:6vh 40px;max-width:900px;margin:0 auto}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.testimonial{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:28px}
+.testimonial-text{font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:16px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--purple));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.testimonial-name{font-size:13px;font-weight:600}
+.testimonial-role{font-size:11px;color:var(--muted)}
+
+/* Manifesto */
+.manifesto{padding:8vh 40px;text-align:center;max-width:800px;margin:0 auto}
+.manifesto-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,48px);line-height:1.2}
+.manifesto-text span{display:inline-block;opacity:0.1;transition:opacity 0.4s,transform 0.4s;transform:translateY(10px)}
+.manifesto-text span.visible{opacity:1;transform:translateY(0)}
+
+/* CTA */
+.cta-section{padding:8vh 40px;text-align:center}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,80px);margin-bottom:20px}
+.cta-sub{font-size:16px;color:var(--muted);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:var(--red);color:#fff;border-radius:40px;font-weight:700;font-size:16px;cursor:pointer;border:none;box-shadow:0 4px 30px var(--red-glow);transition:transform 0.3s,box-shadow 0.3s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 40px var(--red-glow)}
+
+/* Newsletter */
+.newsletter{padding:6vh 40px;text-align:center}
+.newsletter-form{display:flex;max-width:420px;margin:16px auto 0;border-radius:40px;overflow:hidden;border:1px solid var(--border)}
+.newsletter-form input{flex:1;padding:14px 20px;background:transparent;border:none;color:#fff;font-size:14px;outline:none}
+.newsletter-form button{padding:14px 24px;background:var(--red);color:#fff;border:none;font-weight:700;font-size:13px;cursor:pointer;transition:background 0.3s}
+.newsletter-form button:hover{background:#e6234e}
+
+/* Footer */
+footer{padding:4vh 40px;text-align:center;border-top:1px solid var(--border)}
+footer p{font-size:12px;color:var(--muted)}
+
+/* Responsive */
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .nav-links{display:none}
+  .stats{gap:30px}
+  .plans-grid{grid-template-columns:1fr}
+  .hero-title{font-size:48px}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div id="cinema-bg">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+</div>
+<div id="cursor"></div>
+<div class="cursor-light"></div>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div id="intro-logo">VORTEX</div>
+  <div id="intro-line"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">VORTEX</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-cta magnetic">Get Started</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+<div class="hero-inner">
+  <div class="hero-ghost">VORTEX STUDIO</div>
+  <div class="hero-beam"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Premium Creative Studio</div>
+    <h1 class="hero-title"><span>We craft digital</span><br><span>experiences</span></h1>
+    <p class="hero-sub">Cinematic design meets cutting-edge technology. We build brands that demand attention.</p>
+    <button class="hero-btn magnetic">Explore Work →</button>
+  </div>
+  <div class="scroll-prompt">
+    <span>Scroll to explore</span>
+    <div class="line"></div>
+  </div>
+</div>
+</section>
+
+<!-- Stats -->
+<section class="stats" id="stats">
+  <div class="stat"><div class="stat-num counter" data-target="147" data-suffix="+">0</div><div class="stat-label">Projects Delivered</div></div>
+  <div class="stat"><div class="stat-num counter" data-target="98" data-suffix="%">0</div><div class="stat-label">Client Retention</div></div>
+  <div class="stat"><div class="stat-num counter" data-target="12" data-suffix="">0</div><div class="stat-label">Design Awards</div></div>
+  <div class="stat"><div class="stat-num counter" data-target="4" data-suffix=".8★">0</div><div class="stat-label">Average Rating</div></div>
+</section>
+
+<!-- Features -->
+<section class="features" id="work">
+  <h2 class="section-title">What We Build</h2>
+  <div class="features-grid">
+    <div class="feature-card tilt">
+      <div class="feature-icon">🎬</div>
+      <div class="feature-title">Cinematic Websites</div>
+      <div class="feature-desc">Immersive scroll experiences with parallax layers, 3D transforms, and precision animation choreography.</div>
+    </div>
+    <div class="feature-card tilt">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Brand Identity</div>
+      <div class="feature-desc">Visual systems that translate across digital and physical. Logo, type, color, motion — unified.</div>
+    </div>
+    <div class="feature-card tilt">
+      <div class="feature-icon">🔮</div>
+      <div class="feature-title">Product Design</div>
+      <div class="feature-desc">SaaS interfaces that feel premium. Dashboard, onboarding, micro-interactions — every pixel intentional.</div>
+    </div>
+    <div class="feature-card tilt">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Mobile Experiences</div>
+      <div class="feature-desc">Native-feel web apps with gesture support, haptic feedback simulation, and buttery 60fps animations.</div>
+    </div>
+    <div class="feature-card tilt">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">Conversion Funnels</div>
+      <div class="feature-desc">Landing pages engineered for performance. A/B tested patterns with cinematic execution.</div>
+    </div>
+    <div class="feature-card tilt">
+      <div class="feature-icon">🌐</div>
+      <div class="feature-title">Creative Direction</div>
+      <div class="feature-desc">Strategic visual storytelling. We direct the entire digital presence from concept to deployment.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery-section">
+  <h2 class="section-title">Selected Work</h2>
+  <div class="gallery-track">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=750&fit=crop" alt="Project 1"><div class="overlay"><h3>NOCTVRNE</h3><p>Record Label · Branding + Web</p></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=750&fit=crop" alt="Project 2"><div class="overlay"><h3>ETHEREAL</h3><p>Fashion Brand · E-commerce</p></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=600&h=750&fit=crop" alt="Project 3"><div class="overlay"><h3>AXIOM</h3><p>Fintech · Product Design</p></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=600&h=750&fit=crop" alt="Project 4"><div class="overlay"><h3>PULSE</h3><p>Health Tech · Full Platform</p></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=750&fit=crop" alt="Project 5"><div class="overlay"><h3>ARCADE</h3><p>Gaming · Immersive Experience</p></div></div>
+  </div>
+</section>
+
+<!-- Plans -->
+<section class="plans" id="pricing">
+  <h2 class="section-title">Investment</h2>
+  <div class="plans-grid">
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">$2,500<span>/project</span></div>
+      <ul class="plan-features">
+        <li>Single page website</li>
+        <li>Responsive design</li>
+        <li>Basic animations</li>
+        <li>2 revision rounds</li>
+        <li>7-day delivery</li>
+      </ul>
+      <button class="plan-btn">Choose Plan</button>
+    </div>
+    <div class="plan featured">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">$6,500<span>/project</span></div>
+      <ul class="plan-features">
+        <li>Multi-page cinematic site</li>
+        <li>GSAP scroll animations</li>
+        <li>Custom interactions</li>
+        <li>Brand identity system</li>
+        <li>Unlimited revisions</li>
+        <li>14-day delivery</li>
+      </ul>
+      <button class="plan-btn magnetic">Choose Plan</button>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">$15K<span>+</span></div>
+      <ul class="plan-features">
+        <li>Full digital ecosystem</li>
+        <li>Product design + dev</li>
+        <li>Motion design system</li>
+        <li>Dedicated team</li>
+        <li>Ongoing support</li>
+        <li>Custom timeline</li>
+      </ul>
+      <button class="plan-btn">Contact Us</button>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="timeline" id="about">
+  <h2 class="section-title">Our Journey</h2>
+  <div class="timeline-list">
+    <div class="timeline-item"><div class="timeline-date">2019</div><div class="timeline-title">Founded in Buenos Aires</div><div class="timeline-desc">Two designers with a vision for premium digital craft.</div></div>
+    <div class="timeline-item"><div class="timeline-date">2020</div><div class="timeline-title">First Awwwards recognition</div><div class="timeline-desc">Site of the Day for an immersive fashion experience.</div></div>
+    <div class="timeline-item"><div class="timeline-date">2022</div><div class="timeline-title">Team expansion to 8</div><div class="timeline-desc">Added motion designers, developers, and strategists.</div></div>
+    <div class="timeline-item"><div class="timeline-date">2024</div><div class="timeline-title">100+ projects milestone</div><div class="timeline-desc">Clients across 14 countries. Revenue doubled year-over-year.</div></div>
+    <div class="timeline-item"><div class="timeline-date">2026</div><div class="timeline-title">AI-native design studio</div><div class="timeline-desc">First studio to ship AI-augmented cinematic experiences at scale.</div></div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <h2 class="section-title">Client Words</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial"><div class="testimonial-text">"They don't just build websites — they build experiences that make people feel something. Our conversion rate tripled."</div><div class="testimonial-author"><div class="testimonial-avatar">MR</div><div><div class="testimonial-name">Marcos Reyes</div><div class="testimonial-role">CEO, Ethereal Fashion</div></div></div></div>
+    <div class="testimonial"><div class="testimonial-text">"The attention to micro-interactions and scroll choreography was unlike anything we'd seen. Pure cinematic craft."</div><div class="testimonial-author"><div class="testimonial-avatar">LV</div><div><div class="testimonial-name">Laura Vidal</div><div class="testimonial-role">Creative Director, Pulse</div></div></div></div>
+    <div class="testimonial"><div class="testimonial-text">"From concept to launch in 12 days. Premium quality at startup speed. They understand urgency without compromising craft."</div><div class="testimonial-author"><div class="testimonial-avatar">DF</div><div><div class="testimonial-name">Diego Fontana</div><div class="testimonial-role">Founder, Axiom Fintech</div></div></div></div>
+  </div>
+</section>
+
+<!-- Manifesto -->
+<section class="manifesto">
+  <div class="manifesto-text" id="manifesto-text"></div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2 class="cta-title">Ready to stand out?</h2>
+  <p class="cta-sub">We take on 3 projects per month. Let's talk about yours.</p>
+  <button class="cta-btn magnetic">Start a Project →</button>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <h3 style="font-family:'Bebas Neue';font-size:28px;margin-bottom:8px">Stay in the loop</h3>
+  <p style="font-size:13px;color:var(--muted)">Monthly design insights. No spam.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="your@email.com">
+    <button>Subscribe</button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2026 VORTEX Studio. Buenos Aires, Argentina. All rights reserved.</p>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Lenis
+const lenis = new Lenis({ lerp: 0.04, smoothWheel: true, wheelMultiplier: 0.7, touchMultiplier: 1.5 });
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// Cursor
+const cursor = document.getElementById('cursor');
+const cursorLight = document.querySelector('.cursor-light');
+const xTo = gsap.quickTo(cursor, 'left', { duration: 0.5, ease: 'power3' });
+const yTo = gsap.quickTo(cursor, 'top', { duration: 0.5, ease: 'power3' });
+document.addEventListener('mousemove', e => {
+  xTo(e.clientX); yTo(e.clientY);
+  cursorLight.style.left = e.clientX + 'px';
+  cursorLight.style.top = e.clientY + 'px';
+});
+
+// Preloader
+const preloaderTl = gsap.timeline();
+preloaderTl
+  .to('#intro-logo', { opacity: 1, duration: 0.8, ease: 'power2.out' })
+  .to('#intro-line', { height: '50px', duration: 0.6, ease: 'power2.inOut' })
+  .to('#preloader', { yPercent: -100, duration: 0.8, delay: 0.3, ease: 'expo.inOut',
+    onComplete: () => { document.getElementById('preloader').style.display = 'none'; revealHero(); }
+  });
+
+function revealHero() {
+  gsap.fromTo('.hero-tag', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' });
+  gsap.fromTo('.hero-title span', { opacity: 0, y: 60, scale: 0.9, letterSpacing: '0.3em' }, { opacity: 1, y: 0, scale: 1, letterSpacing: '-0.02em', duration: 1.2, stagger: 0.15, ease: 'expo.out', delay: 0.2 });
+  gsap.fromTo('.hero-sub', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.6 });
+  gsap.fromTo('.hero-btn', { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)', delay: 0.8 });
+  gsap.fromTo('.hero-beam', { opacity: 0, scaleY: 0 }, { opacity: 0.7, scaleY: 1, duration: 1.2, ease: 'expo.out', delay: 0.3 });
+
+  // Hero parallax on scroll (pinned feel)
+  gsap.to('.hero-content', {
+    y: -80, opacity: 0.3, scale: 0.95,
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+  });
+  gsap.to('.hero-ghost', {
+    y: 100, opacity: 0,
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: '60% top', scrub: 1 }
+  });
+  gsap.to('.hero-beam', {
+    scaleY: 1.5, opacity: 0,
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: '70% top', scrub: 1 }
+  });
+}
+
+// Hide scroll prompt on first scroll
+window.addEventListener('scroll', () => {
+  const prompt = document.querySelector('.scroll-prompt');
+  if (prompt && window.scrollY > 50) {
+    gsap.to(prompt, { opacity: 0, y: 20, duration: 0.5, onComplete: () => prompt.remove() });
+  }
+}, { once: true });
+
+// Stats entrance with stagger
+gsap.fromTo('.stat', { opacity: 0, y: 40, scale: 0.9 }, {
+  opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.15, ease: 'back.out(2)',
+  scrollTrigger: { trigger: '.stats', start: 'top 85%', once: true }
+});
+
+// Stats counter
+ScrollTrigger.create({
+  trigger: '.stats',
+  start: 'top 80%',
+  once: true,
+  onEnter: () => {
+    document.querySelectorAll('.counter').forEach((el, i) => {
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      const counter = { val: 0 };
+      gsap.to(counter, { val: target, duration: 2.5, delay: i * 0.1, ease: 'power2.out',
+        onUpdate: () => { el.textContent = Math.round(counter.val) + suffix; }
+      });
+    });
+  }
+});
+
+// Feature cards — 3D tilt
+document.querySelectorAll('.tilt').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const rotX = (e.clientY - r.top - r.height / 2) / r.height * -12;
+    const rotY = (e.clientX - r.left - r.width / 2) / r.width * 12;
+    gsap.to(card, { rotateX: rotX, rotateY: rotY, transformPerspective: 800, duration: 0.3, ease: 'power2.out' });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' });
+  });
+});
+
+// Features entrance
+gsap.fromTo('.feature-card', { opacity: 0, y: 60, rotateX: -15, scale: 0.9 }, {
+  opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 1, stagger: 0.12, ease: 'expo.out',
+  scrollTrigger: { trigger: '.features-grid', start: 'top 80%' }
+});
+
+// Gallery horizontal scroll
+const gallerySection = document.querySelector('.gallery-section');
+const galleryTrack = document.querySelector('.gallery-track');
+gsap.to(galleryTrack, {
+  x: () => -(galleryTrack.scrollWidth - window.innerWidth + 100),
+  ease: 'none',
+  scrollTrigger: { trigger: gallerySection, pin: true, scrub: 1, end: () => '+=' + galleryTrack.scrollWidth }
+});
+
+// Plans entrance
+gsap.fromTo('.plan', { opacity: 0, y: 80, rotateX: -20, scale: 0.9 }, {
+  opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 1, stagger: 0.2, ease: 'expo.out', transformPerspective: 1000,
+  scrollTrigger: { trigger: '.plans-grid', start: 'top 80%' }
+});
+
+// Timeline — slide + clip
+gsap.fromTo('.timeline-item', { opacity: 0, x: -60, clipPath: 'inset(0 100% 0 0)' }, {
+  opacity: 1, x: 0, clipPath: 'inset(0 0% 0 0)', duration: 1, stagger: 0.2, ease: 'expo.out',
+  scrollTrigger: { trigger: '.timeline-list', start: 'top 75%' }
+});
+
+// Timeline dates — punch
+gsap.fromTo('.timeline-date', { scale: 0 }, {
+  scale: 1, duration: 0.6, stagger: 0.15, ease: 'back.out(3)',
+  scrollTrigger: { trigger: '.timeline-list', start: 'top 75%' }
+});
+
+// Testimonials — blur to sharp
+gsap.fromTo('.testimonial', { opacity: 0, y: 30, filter: 'blur(8px)' }, {
+  opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, stagger: 0.2, ease: 'power2.out',
+  scrollTrigger: { trigger: '.testimonials-grid', start: 'top 80%' }
+});
+
+// Manifesto word-by-word
+const manifestoText = "We don't design pages. We design feelings. Every pixel is a decision. Every animation tells a story. Premium is not about cost — it's about craft. We obsess so our clients don't have to.";
+const manifestoEl = document.getElementById('manifesto-text');
+manifestoEl.innerHTML = manifestoText.split(' ').map(w => `<span>${w}</span> `).join('');
+const manifestoWords = manifestoEl.querySelectorAll('span');
+ScrollTrigger.create({
+  trigger: '.manifesto',
+  start: 'top 70%',
+  end: 'bottom 30%',
+  scrub: true,
+  onUpdate: (self) => {
+    const progress = self.progress;
+    const visibleCount = Math.floor(progress * manifestoWords.length);
+    manifestoWords.forEach((w, i) => {
+      if (i <= visibleCount) w.classList.add('visible');
+      else w.classList.remove('visible');
+    });
+  }
+});
+
+// CTA entrance
+gsap.fromTo('.cta-title', { opacity: 0, scale: 0.8 }, {
+  opacity: 1, scale: 1, duration: 1, ease: 'expo.out',
+  scrollTrigger: { trigger: '.cta-section', start: 'top 75%' }
+});
+gsap.fromTo('.cta-btn', { opacity: 0, y: 30 }, {
+  opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+  scrollTrigger: { trigger: '.cta-section', start: 'top 70%' }
+});
+
+// Magnetic buttons
+document.querySelectorAll('.magnetic').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.4, ease: 'power2.out' });
+  });
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.5)' });
+  });
+});
+
+// Nav hide on scroll down
+let lastScroll = 0;
+ScrollTrigger.create({
+  onUpdate: (self) => {
+    const nav = document.querySelector('nav');
+    if (self.direction === 1 && self.scroll() > 100) nav.style.transform = 'translateY(-100%)';
+    else nav.style.transform = 'translateY(0)';
+    nav.style.transition = 'transform 0.4s ease';
+  }
+});
+
+// Newsletter form slide
+gsap.fromTo('.newsletter-form', { opacity: 0, y: 20, scale: 0.95 }, {
+  opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power2.out',
+  scrollTrigger: { trigger: '.newsletter', start: 'top 80%' }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "webos",
+  "version": "3.1.0",
+  "description": "Premium Web Builder for AI Assistants — Turn any AI into a €2000+ web designer",
+  "keywords": ["ai-prompts", "web-design", "landing-page", "dashboard", "gsap", "premium-ui", "copilot", "claude", "cursor"],
+  "author": "RiseOS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "scripts": {}
+}
