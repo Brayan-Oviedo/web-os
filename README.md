@@ -12,6 +12,28 @@
 
 ---
 
+## Requisitos
+
+| Requisito | Detalle |
+|-----------|---------|
+| **IA compatible** | GitHub Copilot (VS Code), Claude Code, Cursor, ChatGPT, Open WebUI, o cualquier LLM que acepte system prompts |
+| **Editor** | VS Code (recomendado), Cursor, o terminal con Claude Code |
+| **Modelo mínimo** | GPT-4o, Claude Sonnet 3.5+, o equivalente (modelos pequeños no siguen instrucciones complejas) |
+| **Internet** | Sí — el HTML generado usa CDNs (GSAP, Google Fonts, Unsplash) |
+| **Programación** | NO necesitas saber código. Solo describir lo que quieres |
+| **Instalación** | Cero. No requiere Node.js, npm, ni ninguna dependencia local |
+| **Sistema operativo** | Windows, macOS, Linux — cualquiera |
+| **Hosting** | El HTML funciona en cualquier hosting: Netlify, Vercel, GitHub Pages, o simplemente abrir el archivo |
+
+### Lo que NO necesitas:
+- ❌ No necesitas saber HTML/CSS/JS
+- ❌ No necesitas instalar nada (ni Node, ni Python, ni Docker)
+- ❌ No necesitas pagar (es MIT, gratuito para siempre)
+- ❌ No necesitas experiencia en diseño
+- ❌ No necesitas configurar nada manualmente (la IA lo detecta sola)
+
+---
+
 ## El Problema
 
 Crear una landing page o dashboard premium toma **días de trabajo**:
